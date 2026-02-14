@@ -1,0 +1,192 @@
+.adhd-chores-view {
+	padding: 12px;
+}
+
+.adhd-chores-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.adhd-chores-header h3 {
+	margin: 0;
+}
+
+.adhd-chores-actions {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	max-width: 100%;
+}
+
+.adhd-chores-actions button {
+	font-size: 12px;
+	padding: 4px 10px;
+	white-space: nowrap;
+}
+
+.adhd-chip-row {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.adhd-calendar-strip {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	gap: 6px;
+	margin-bottom: 10px;
+	padding-bottom: 2px;
+}
+
+.adhd-cal-day {
+	font-size: 11px;
+	padding: 4px 8px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	background: var(--background-primary);
+	text-align: center;
+	line-height: 1.1;
+	white-space: nowrap;
+	min-width: 42px;
+	flex: 0 0 auto;
+}
+
+.adhd-cal-day.today {
+	border-color: var(--interactive-accent);
+}
+
+.adhd-cal-day.selected {
+	background: color-mix(in srgb, var(--interactive-accent) 18%, var(--background-primary));
+}
+
+.adhd-calendar-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin: -2px 0 8px;
+}
+
+.adhd-calendar-selected {
+	font-size: 11px;
+	color: var(--text-muted);
+	margin-right: auto;
+}
+
+.adhd-calendar-actions button {
+	font-size: 11px;
+	padding: 2px 8px;
+}
+
+.adhd-chip {
+	font-size: 11px;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: var(--background-modifier-hover);
+	color: var(--text-muted);
+}
+
+.adhd-badge-chip {
+	background: color-mix(in srgb, var(--interactive-accent) 20%, var(--background-modifier-hover));
+	color: var(--text-normal);
+	border: 1px solid var(--background-modifier-border);
+}
+
+.adhd-badge-row {
+	padding: 10px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	margin-bottom: 8px;
+}
+
+.adhd-badge-row.unlocked {
+	background: color-mix(in srgb, var(--interactive-accent) 10%, var(--background-primary));
+}
+
+.adhd-badge-title {
+	font-weight: 600;
+}
+
+.adhd-badge-desc {
+	font-size: 12px;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.adhd-badge-progress {
+	font-size: 11px;
+	margin-top: 6px;
+}
+
+.adhd-section-title {
+	margin: 12px 0 6px;
+	font-size: 12px;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+}
+
+.adhd-task-row {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	padding: 8px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.adhd-task-row.done .adhd-task-title {
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+
+.adhd-task-main {
+	flex: 1;
+	min-width: 0;
+}
+
+.adhd-task-title {
+	font-weight: 500;
+}
+
+.adhd-task-meta {
+	font-size: 11px;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.adhd-task-row button {
+	font-size: 11px;
+	padding: 2px 8px;
+}
+
+.adhd-body-timer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	margin-bottom: 8px;
+}
+
+.adhd-body-timer strong {
+	margin-left: auto;
+}
+
+.adhd-body-timer button {
+	font-size: 11px;
+	padding: 2px 8px;
+}
+
+.adhd-empty {
+	color: var(--text-muted);
+	font-style: italic;
+	padding: 8px 0;
+}

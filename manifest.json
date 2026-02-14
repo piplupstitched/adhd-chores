@@ -1,0 +1,11 @@
+{
+	"id": "adhd-chores",
+	"name": "ADHD Chore Autopilot",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "Automated chore scheduling with ADHD-friendly daily planning, quick focus mode, and optional streak/rewards gamification.",
+	"author": "Piplup Stitched",
+	"authorUrl": "https://github.com/piplupstitched",
+	"fundingUrl": "https://ko-fi.com/piplupstitched",
+	"isDesktopOnly": true
+}

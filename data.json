@@ -1,0 +1,662 @@
+{
+  "templates": [
+    {
+      "id": "kitchen-reset",
+      "name": "Kitchen reset",
+      "room": "Kitchen",
+      "frequency": "daily",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 10,
+      "points": 12,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "lastCompleted": "2026-02-13"
+    },
+    {
+      "id": "bathroom-clean",
+      "name": "Clean bathroom sink + mirror",
+      "room": "Bathroom",
+      "frequency": "every_n_days",
+      "interval": 3,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 12,
+      "points": 14,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "lastCompleted": "2026-02-13"
+    },
+    {
+      "id": "laundry-cycle",
+      "name": "Laundry load",
+      "room": "Laundry",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        0,
+        3
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 15,
+      "points": 15,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-make-bed",
+      "name": "Make bed",
+      "room": "Bedroom",
+      "frequency": "daily",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 3,
+      "points": 4,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "lastCompleted": "2026-02-13"
+    },
+    {
+      "id": "std-kitchen-reset",
+      "name": "Kitchen reset and dishes",
+      "room": "Kitchen",
+      "frequency": "daily",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 12,
+      "points": 12,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-10min-tidy",
+      "name": "10-minute home tidy",
+      "room": "Whole Home",
+      "frequency": "daily",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 10,
+      "points": 10,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "lastCompleted": "2026-02-13"
+    },
+    {
+      "id": "std-bathroom-touchup",
+      "name": "Bathroom sink and mirror touch-up",
+      "room": "Bathroom",
+      "frequency": "every_n_days",
+      "interval": 3,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 10,
+      "points": 10,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "anchorDate": "2026-01-02"
+    },
+    {
+      "id": "std-trash",
+      "name": "Empty trash and recycling",
+      "room": "Whole Home",
+      "frequency": "every_n_days",
+      "interval": 2,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 8,
+      "points": 8,
+      "active": true,
+      "createdAt": "2026-01-01",
+      "anchorDate": "2026-01-01"
+    },
+    {
+      "id": "std-laundry",
+      "name": "Laundry load",
+      "room": "Laundry",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        3,
+        0
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 15,
+      "points": 14,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-vacuum",
+      "name": "Vacuum floors",
+      "room": "Whole Home",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        6
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 25,
+      "points": 20,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-mop",
+      "name": "Mop hard floors",
+      "room": "Kitchen/Bathroom",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        0
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 20,
+      "points": 18,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-bathroom-deep",
+      "name": "Clean bathroom (toilet, tub, floor)",
+      "room": "Bathroom",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        1
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 30,
+      "points": 24,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-dust",
+      "name": "Dust surfaces",
+      "room": "Living Areas",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        4
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 15,
+      "points": 14,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-change-sheets",
+      "name": "Change bed sheets",
+      "room": "Bedroom",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        0
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 12,
+      "points": 12,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-fridge-check",
+      "name": "Fridge cleanout and wipe",
+      "room": "Kitchen",
+      "frequency": "weekly",
+      "interval": 1,
+      "preferredDays": [
+        4
+      ],
+      "dayOfMonth": 1,
+      "estMinutes": 15,
+      "points": 14,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-filter-check",
+      "name": "HVAC filter check/replacement",
+      "room": "Home",
+      "frequency": "monthly",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 1,
+      "estMinutes": 8,
+      "points": 10,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-deep-fridge",
+      "name": "Deep clean fridge shelves",
+      "room": "Kitchen",
+      "frequency": "monthly",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 10,
+      "estMinutes": 25,
+      "points": 22,
+      "active": true,
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "std-baseboards",
+      "name": "Wipe baseboards and doors",
+      "room": "Whole Home",
+      "frequency": "monthly",
+      "interval": 1,
+      "preferredDays": [],
+      "dayOfMonth": 20,
+      "estMinutes": 30,
+      "points": 24,
+      "active": true,
+      "createdAt": "2026-01-01"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-1771020796552-xrxkgr",
+      "templateId": "std-bathroom-touchup",
+      "title": "Bathroom sink and mirror touch-up",
+      "room": "Bathroom",
+      "dueDate": "2026-02-13",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796552-a6m1vy",
+      "templateId": "std-kitchen-reset",
+      "title": "Kitchen reset and dishes",
+      "room": "Kitchen",
+      "dueDate": "2026-02-13",
+      "estMinutes": 12,
+      "points": 12,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771007605733-unblt6",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-13",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "done",
+      "completedAt": "2026-02-13T18:33:53.293Z"
+    },
+    {
+      "id": "task-1771004178091-nsbjbq",
+      "templateId": "bathroom-clean",
+      "title": "Clean bathroom sink + mirror",
+      "room": "Bathroom",
+      "dueDate": "2026-02-13",
+      "estMinutes": 12,
+      "points": 14,
+      "status": "done",
+      "completedAt": "2026-02-13T17:39:30.654Z"
+    },
+    {
+      "id": "task-1771007605733-8qpmf7",
+      "templateId": "kitchen-reset",
+      "title": "Kitchen reset",
+      "room": "Kitchen",
+      "dueDate": "2026-02-13",
+      "estMinutes": 10,
+      "points": 12,
+      "status": "done",
+      "completedAt": "2026-02-13T18:34:07.169Z"
+    },
+    {
+      "id": "task-1771007605733-a953qn",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-13",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "done",
+      "completedAt": "2026-02-13T18:34:07.786Z"
+    },
+    {
+      "id": "task-1771020796556-o4vzcm",
+      "templateId": "std-trash",
+      "title": "Empty trash and recycling",
+      "room": "Whole Home",
+      "dueDate": "2026-02-14",
+      "estMinutes": 8,
+      "points": 8,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796556-hkb61k",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-14",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796556-zzrxdp",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-14",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "done",
+      "completedAt": "2026-02-13T22:53:49.112Z"
+    },
+    {
+      "id": "task-1771020796567-s4sb7g",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-15",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796556-fnwt94",
+      "templateId": "kitchen-reset",
+      "title": "Kitchen reset",
+      "room": "Kitchen",
+      "dueDate": "2026-02-15",
+      "estMinutes": 10,
+      "points": 12,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796567-mq4ynl",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-15",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796576-zjycop",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-16",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796576-zwk1cw",
+      "templateId": "std-trash",
+      "title": "Empty trash and recycling",
+      "room": "Whole Home",
+      "dueDate": "2026-02-16",
+      "estMinutes": 8,
+      "points": 8,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796576-qknm5z",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-16",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796589-voog59",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-17",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796576-yoe8ra",
+      "templateId": "std-bathroom-touchup",
+      "title": "Bathroom sink and mirror touch-up",
+      "room": "Bathroom",
+      "dueDate": "2026-02-17",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796589-r5qtl7",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-17",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796602-mqowg6",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-18",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796602-n6iaf6",
+      "templateId": "std-trash",
+      "title": "Empty trash and recycling",
+      "room": "Whole Home",
+      "dueDate": "2026-02-18",
+      "estMinutes": 8,
+      "points": 8,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796602-z40f7m",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-18",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796611-ksbnax",
+      "templateId": "std-10min-tidy",
+      "title": "10-minute home tidy",
+      "room": "Whole Home",
+      "dueDate": "2026-02-19",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796611-boqw5z",
+      "templateId": "std-bathroom-touchup",
+      "title": "Bathroom sink and mirror touch-up",
+      "room": "Bathroom",
+      "dueDate": "2026-02-19",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796611-hn7q06",
+      "templateId": "std-make-bed",
+      "title": "Make bed",
+      "room": "Bedroom",
+      "dueDate": "2026-02-19",
+      "estMinutes": 3,
+      "points": 4,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425191-txr1h0",
+      "templateId": "std-bathroom-touchup",
+      "title": "Bathroom sink and mirror touch-up",
+      "room": "Bathroom",
+      "dueDate": "2026-02-20",
+      "estMinutes": 10,
+      "points": 10,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425177-ebrp2p",
+      "templateId": "std-change-sheets",
+      "title": "Change bed sheets",
+      "room": "Bedroom",
+      "dueDate": "2026-02-20",
+      "estMinutes": 12,
+      "points": 12,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425181-qqd89b",
+      "templateId": "std-bathroom-deep",
+      "title": "Clean bathroom (toilet, tub, floor)",
+      "room": "Bathroom",
+      "dueDate": "2026-02-20",
+      "estMinutes": 30,
+      "points": 24,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425181-tsmg4b",
+      "templateId": "bathroom-clean",
+      "title": "Clean bathroom sink + mirror",
+      "room": "Bathroom",
+      "dueDate": "2026-02-20",
+      "estMinutes": 12,
+      "points": 14,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425191-0fk26n",
+      "templateId": "std-dust",
+      "title": "Dust surfaces",
+      "room": "Living Areas",
+      "dueDate": "2026-02-20",
+      "estMinutes": 15,
+      "points": 14,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425191-5dkg4s",
+      "templateId": "std-fridge-check",
+      "title": "Fridge cleanout and wipe",
+      "room": "Kitchen",
+      "dueDate": "2026-02-20",
+      "estMinutes": 15,
+      "points": 14,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771020796576-p0ql0g",
+      "templateId": "kitchen-reset",
+      "title": "Kitchen reset",
+      "room": "Kitchen",
+      "dueDate": "2026-02-20",
+      "estMinutes": 10,
+      "points": 12,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771007605733-tnmxx9",
+      "templateId": "std-kitchen-reset",
+      "title": "Kitchen reset and dishes",
+      "room": "Kitchen",
+      "dueDate": "2026-02-20",
+      "estMinutes": 12,
+      "points": 12,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425177-ehxx5h",
+      "templateId": "laundry-cycle",
+      "title": "Laundry load",
+      "room": "Laundry",
+      "dueDate": "2026-02-20",
+      "estMinutes": 15,
+      "points": 15,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425177-789ubr",
+      "templateId": "std-laundry",
+      "title": "Laundry load",
+      "room": "Laundry",
+      "dueDate": "2026-02-20",
+      "estMinutes": 15,
+      "points": 14,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425177-lurqro",
+      "templateId": "std-mop",
+      "title": "Mop hard floors",
+      "room": "Kitchen/Bathroom",
+      "dueDate": "2026-02-20",
+      "estMinutes": 20,
+      "points": 18,
+      "status": "pending"
+    },
+    {
+      "id": "task-1771008425175-nx5xxf",
+      "templateId": "std-vacuum",
+      "title": "Vacuum floors",
+      "room": "Whole Home",
+      "dueDate": "2026-02-20",
+      "estMinutes": 25,
+      "points": 20,
+      "status": "pending"
+    }
+  ],
+  "rewards": {
+    "xp": 62,
+    "level": 1,
+    "currentStreak": 1,
+    "longestStreak": 1,
+    "lastCompletionDate": "2026-02-13"
+  },
+  "badges": [],
+  "settings": {
+    "maxDailyMinutes": 25,
+    "autoGenerateOnStartup": true,
+    "rolloverMissed": true,
+    "focusTaskCount": 3,
+    "enableRewards": true,
+    "showGamification": true,
+    "remindersEnabled": true,
+    "reminderTimesCsv": "09:00,14:00,19:00",
+    "logToNote": true,
+    "logNotePath": "TaskNotes/Chore Log.md",
+    "autoWeeklyReset": true,
+    "dailyNotesIntegrationEnabled": true,
+    "syncDailyBlockOnPlan": true,
+    "dailyNotesFolder": "",
+    "dailyNotesFormat": "",
+    "emitTasksPluginFormat": true,
+    "choreTaskTag": ""
+  },
+  "meta": {
+    "lastWeeklyResetDate": "2026-02-13",
+    "lastPlanDate": "2026-02-13",
+    "bodyDoubleEndsAt": "",
+    "bodyDoubleDurationMinutes": 0
+  }
+}
