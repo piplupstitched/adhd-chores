@@ -179,28 +179,31 @@ var AddChoreModal = class extends import_obsidian.Modal {
       this.pointsVal = Number.isFinite(n) ? Math.max(1, n) : 10;
     }));
     const row = contentEl.createDiv();
-    const save = row.createEl("button", { text: "Save Template" });
-    save.addEventListener("click", async () => {
-      if (!this.nameVal) {
-        new import_obsidian.Notice("Please enter a chore name.");
-        return;
-      }
-      const preferredDays = this.preferredDaysVal.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => Number.isFinite(n) && n >= 0 && n <= 6);
-      const template = {
-        id: `custom-${Date.now()}`,
-        name: this.nameVal,
-        room: this.roomVal || "Home",
-        frequency: this.frequencyVal,
-        interval: this.intervalVal,
-        preferredDays,
-        dayOfMonth: this.dayOfMonthVal,
-        estMinutes: this.estMinutesVal,
-        points: this.pointsVal,
-        active: true,
-        createdAt: fmtDate(/* @__PURE__ */ new Date())
-      };
-      await this.onSave(template);
-      this.close();
+    const save = row.createEl("button", { text: "Save template" });
+    save.addEventListener("click", () => {
+      void (async () => {
+        if (!this.nameVal) {
+          new import_obsidian.Notice("Please enter a chore name.");
+          return;
+        }
+        const preferredDays = this.preferredDaysVal.split(",").map((s) => parseInt(s.trim(), 10)).filter((n) => Number.isFinite(n) && n >= 0 && n <= 6);
+        const template = {
+          id: `custom-${Date.now()}`,
+          name: this.nameVal,
+          room: this.roomVal || "Home",
+          frequency: this.frequencyVal,
+          interval: this.intervalVal,
+          preferredDays,
+          dayOfMonth: this.dayOfMonthVal,
+          estMinutes: this.estMinutesVal,
+          points: this.pointsVal,
+          active: true,
+          createdAt: fmtDate(/* @__PURE__ */ new Date())
+        };
+        await this.onSave(template);
+        this.close();
+      })().catch(() => {
+      });
     });
     const cancel = row.createEl("button", { text: "Cancel" });
     cancel.addEventListener("click", () => this.close());
@@ -232,7 +235,7 @@ var BadgesModal = class extends import_obsidian.Modal {
     this.plugin = plugin;
   }
   onOpen() {
-    this.titleEl.setText("Badges and Milestones");
+    this.titleEl.setText("Badges and milestones");
     const { contentEl } = this;
     contentEl.empty();
     const catalog = this.plugin.getBadgeCatalog();
@@ -282,33 +285,33 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
   getIcon() {
     return "check-square";
   }
-  async onOpen() {
-    await this.render();
+  onOpen() {
+    this.render();
   }
-  async render() {
+  render() {
     const container = this.containerEl.children[1];
     container.empty();
     container.addClass("adhd-chores-view");
     const header = container.createDiv("adhd-chores-header");
-    header.createEl("h3", { text: "Chore Autopilot" });
+    header.createEl("h3", { text: "Chore autopilot" });
     const actions = header.createDiv("adhd-chores-actions");
-    const planBtn = actions.createEl("button", { text: "Plan Today" });
-    planBtn.addEventListener("click", async () => {
-      await this.plugin.generateTodayPlan(true);
+    const planBtn = actions.createEl("button", { text: "Plan today" });
+    planBtn.addEventListener("click", () => {
+      void this.plugin.generateTodayPlan(true);
     });
-    const focusBtn = actions.createEl("button", { text: "Quick Focus" });
-    focusBtn.addEventListener("click", async () => {
-      await this.plugin.quickFocusMode();
+    const focusBtn = actions.createEl("button", { text: "Quick focus" });
+    focusBtn.addEventListener("click", () => {
+      void this.plugin.quickFocusMode();
     });
-    const bodyBtn = actions.createEl("button", { text: "Body Double" });
+    const bodyBtn = actions.createEl("button", { text: "Body double" });
     bodyBtn.addEventListener("click", () => this.plugin.openBodyDoubleModal());
     const badgesBtn = actions.createEl("button", { text: "Badges" });
     badgesBtn.addEventListener("click", () => this.plugin.openBadgesModal());
-    const resetBtn = actions.createEl("button", { text: "Weekly Reset" });
-    resetBtn.addEventListener("click", async () => {
-      await this.plugin.runWeeklyReset(true);
+    const resetBtn = actions.createEl("button", { text: "Weekly reset" });
+    resetBtn.addEventListener("click", () => {
+      void this.plugin.runWeeklyReset(true);
     });
-    const addBtn = actions.createEl("button", { text: "Add Chore" });
+    const addBtn = actions.createEl("button", { text: "Add chore" });
     addBtn.addEventListener("click", () => this.plugin.openAddTemplateModal());
     const today = this.plugin.todayStr();
     if (!this.selectedDate)
@@ -330,9 +333,9 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
       if (date === this.selectedDate)
         btn.addClass("selected");
       btn.setAttribute("title", `${pending} pending, ${done} done`);
-      btn.addEventListener("click", async () => {
+      btn.addEventListener("click", () => {
         this.selectedDate = date;
-        await this.render();
+        this.render();
       });
     }
     const viewDate = this.selectedDate || today;
@@ -343,17 +346,17 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
       cls: "adhd-calendar-selected",
       text: `${viewDate} | ${viewPending} pending, ${viewDone} done`
     });
-    const openDayNoteBtn = calActions.createEl("button", { text: "Open Day Note" });
-    openDayNoteBtn.addEventListener("click", async () => {
-      await this.plugin.openDailyNoteForDate(viewDate);
+    const openDayNoteBtn = calActions.createEl("button", { text: "Open day note" });
+    openDayNoteBtn.addEventListener("click", () => {
+      void this.plugin.openDailyNoteForDate(viewDate);
     });
-    const syncDayNoteBtn = calActions.createEl("button", { text: "Sync Chores" });
-    syncDayNoteBtn.addEventListener("click", async () => {
-      await this.plugin.syncDateToDailyNote(viewDate);
+    const syncDayNoteBtn = calActions.createEl("button", { text: "Sync chores" });
+    syncDayNoteBtn.addEventListener("click", () => {
+      void this.plugin.syncDateToDailyNote(viewDate);
     });
-    const syncWeekBtn = calActions.createEl("button", { text: "Sync Week" });
-    syncWeekBtn.addEventListener("click", async () => {
-      await this.plugin.syncWeekToDailyNotes();
+    const syncWeekBtn = calActions.createEl("button", { text: "Sync week" });
+    syncWeekBtn.addEventListener("click", () => {
+      void this.plugin.syncWeekToDailyNotes();
     });
     const todayTasks = this.plugin.getTasksForDate(viewDate);
     const pendingToday = todayTasks.filter((t) => t.status === "pending");
@@ -370,7 +373,7 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
       }
     }
     if (this.plugin.data.settings.showGamification && this.plugin.data.badges.length > 0) {
-      container.createEl("div", { cls: "adhd-section-title", text: "Recent Badges" });
+      container.createEl("div", { cls: "adhd-section-title", text: "Recent badges" });
       const badgesRow = container.createDiv("adhd-chip-row");
       for (const badge of this.plugin.data.badges.slice(-3).reverse()) {
         const chip = badgesRow.createDiv({ cls: "adhd-chip adhd-badge-chip", text: badge.label });
@@ -379,19 +382,19 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
     }
     if (this.plugin.isBodyDoubleActive()) {
       const timerRow = container.createDiv("adhd-body-timer");
-      timerRow.createEl("span", { text: "Body Double" });
+      timerRow.createEl("span", { text: "Body double" });
       timerRow.createEl("strong", {
         cls: "adhd-body-timer-value",
         text: this.plugin.getBodyDoubleRemainingLabel()
       });
       const cancel = timerRow.createEl("button", { text: "Cancel" });
-      cancel.addEventListener("click", async () => {
-        await this.plugin.cancelBodyDoubleSession();
+      cancel.addEventListener("click", () => {
+        void this.plugin.cancelBodyDoubleSession();
       });
     }
-    container.createEl("div", { cls: "adhd-section-title", text: `Day Plan (${viewDate})` });
+    container.createEl("div", { cls: "adhd-section-title", text: `Day plan (${viewDate})` });
     if (todayTasks.length === 0) {
-      container.createEl("div", { cls: "adhd-empty", text: 'No chores scheduled. Click "Plan Today".' });
+      container.createEl("div", { cls: "adhd-empty", text: 'No chores scheduled. Click "Plan today".' });
     } else {
       for (const task of todayTasks) {
         const row = container.createDiv("adhd-task-row");
@@ -400,17 +403,17 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
         const checkbox = row.createEl("input", { type: "checkbox" });
         checkbox.checked = task.status === "done";
         checkbox.disabled = task.status === "done";
-        checkbox.addEventListener("change", async () => {
+        checkbox.addEventListener("change", () => {
           if (checkbox.checked)
-            await this.plugin.completeTask(task.id);
+            void this.plugin.completeTask(task.id);
         });
         const main = row.createDiv("adhd-task-main");
         main.createEl("div", { cls: "adhd-task-title", text: task.title });
         main.createEl("div", { cls: "adhd-task-meta", text: `${task.room} | ${task.estMinutes}m | ${task.points} pts` });
         if (task.status === "pending") {
           const snooze = row.createEl("button", { text: "Snooze +1d" });
-          snooze.addEventListener("click", async () => {
-            await this.plugin.snoozeTask(task.id, 1);
+          snooze.addEventListener("click", () => {
+            void this.plugin.snoozeTask(task.id, 1);
           });
         }
       }
@@ -437,7 +440,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "ADHD Chore Autopilot" });
+    new import_obsidian.Setting(containerEl).setName("ADHD chore autopilot").setHeading();
     containerEl.createEl("p", {
       text: "Task query integration officially supports the community Tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.",
       cls: "adhd-empty"
@@ -470,7 +473,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       await this.plugin.savePluginData();
       this.plugin.refreshView();
     }));
-    containerEl.createEl("h3", { text: "Reminders" });
+    new import_obsidian.Setting(containerEl).setName("Reminders").setHeading();
     new import_obsidian.Setting(containerEl).setName("Enable reminders").addToggle((t) => t.setValue(this.plugin.data.settings.remindersEnabled).onChange(async (v) => {
       this.plugin.data.settings.remindersEnabled = v;
       await this.plugin.savePluginData();
@@ -479,7 +482,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.reminderTimesCsv = v.trim();
       await this.plugin.savePluginData();
     }));
-    containerEl.createEl("h3", { text: "Logging" });
+    new import_obsidian.Setting(containerEl).setName("Logging").setHeading();
     new import_obsidian.Setting(containerEl).setName("Log events to note").addToggle((t) => t.setValue(this.plugin.data.settings.logToNote).onChange(async (v) => {
       this.plugin.data.settings.logToNote = v;
       await this.plugin.savePluginData();
@@ -488,12 +491,12 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.logNotePath = v.trim() || "TaskNotes/Chore Log.md";
       await this.plugin.savePluginData();
     }));
-    containerEl.createEl("h3", { text: "Weekly reset" });
+    new import_obsidian.Setting(containerEl).setName("Weekly reset").setHeading();
     new import_obsidian.Setting(containerEl).setName("Auto weekly reset").setDesc("Runs on Mondays at startup.").addToggle((t) => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange(async (v) => {
       this.plugin.data.settings.autoWeeklyReset = v;
       await this.plugin.savePluginData();
     }));
-    containerEl.createEl("h3", { text: "Daily Notes Integration" });
+    new import_obsidian.Setting(containerEl).setName("Daily notes integration").setHeading();
     new import_obsidian.Setting(containerEl).setName("Enable Daily Notes integration").setDesc("Use selected date actions to open/sync daily notes.").addToggle((t) => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange(async (v) => {
       this.plugin.data.settings.dailyNotesIntegrationEnabled = v;
       await this.plugin.savePluginData();
@@ -518,18 +521,21 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.choreTaskTag = v.trim();
       await this.plugin.savePluginData();
     }));
-    containerEl.createEl("h3", { text: "Chore Templates" });
+    new import_obsidian.Setting(containerEl).setName("Chore templates").setHeading();
     for (const template of this.plugin.data.templates) {
       new import_obsidian.Setting(containerEl).setName(`${template.name} (${template.room})`).setDesc(this.plugin.describeTemplate(template)).addToggle((t) => t.setValue(template.active).onChange(async (v) => {
         template.active = v;
         await this.plugin.savePluginData();
         this.display();
-      })).addButton((b) => b.setButtonText("Delete").setWarning().onClick(async () => {
-        this.plugin.data.templates = this.plugin.data.templates.filter((t) => t.id !== template.id);
-        this.plugin.data.tasks = this.plugin.data.tasks.filter((task) => task.templateId !== template.id);
-        await this.plugin.savePluginData();
-        this.display();
-        this.plugin.refreshView();
+      })).addButton((b) => b.setButtonText("Delete").setWarning().onClick(() => {
+        void (async () => {
+          this.plugin.data.templates = this.plugin.data.templates.filter((t) => t.id !== template.id);
+          this.plugin.data.tasks = this.plugin.data.tasks.filter((task) => task.templateId !== template.id);
+          await this.plugin.savePluginData();
+          this.display();
+          this.plugin.refreshView();
+        })().catch(() => {
+        });
       }));
     }
     new import_obsidian.Setting(containerEl).addButton((b) => b.setButtonText("Add chore template").setCta().onClick(() => this.plugin.openAddTemplateModal()));
@@ -555,29 +561,43 @@ var ADHDChoresPlugin = class extends import_obsidian.Plugin {
     });
     this.bodyDoubleStatusEl = this.addStatusBarItem();
     this.updateBodyDoubleStatus();
-    this.addCommand({ id: "open-chore-autopilot", name: "Open chore autopilot", callback: () => this.activateView() });
-    this.addCommand({ id: "plan-today-chores", name: "Plan today chores", callback: () => this.generateTodayPlan(true) });
-    this.addCommand({ id: "quick-focus-chores", name: "Quick focus chores", callback: () => this.quickFocusMode() });
+    this.addCommand({ id: "open-chore-autopilot", name: "Open chore autopilot", callback: () => {
+      void this.activateView();
+    } });
+    this.addCommand({ id: "plan-today-chores", name: "Plan today chores", callback: () => {
+      void this.generateTodayPlan(true);
+    } });
+    this.addCommand({ id: "quick-focus-chores", name: "Quick focus chores", callback: () => {
+      void this.quickFocusMode();
+    } });
     this.addCommand({ id: "add-chore-template", name: "Add chore template", callback: () => this.openAddTemplateModal() });
     this.addCommand({ id: "start-body-double-session", name: "Start body double session", callback: () => this.openBodyDoubleModal() });
     this.addCommand({ id: "open-chore-badges", name: "Open badges and milestones", callback: () => this.openBadgesModal() });
-    this.addCommand({ id: "weekly-reset-chores", name: "Run weekly reset", callback: () => this.runWeeklyReset(true) });
+    this.addCommand({ id: "weekly-reset-chores", name: "Run weekly reset", callback: () => {
+      void this.runWeeklyReset(true);
+    } });
     this.addCommand({ id: "open-chore-log-note", name: "Open chore log note", callback: () => this.openLogNote() });
-    this.addCommand({ id: "sync-week-to-daily-notes", name: "Sync this week chores to daily notes", callback: () => this.syncWeekToDailyNotes() });
-    this.addCommand({ id: "create-chore-dashboard-note", name: "Create or open Chore Dashboard note", callback: () => this.createOrOpenChoreDashboard() });
-    this.app.workspace.onLayoutReady(async () => {
-      const today = this.todayStr();
-      if (this.data.settings.autoWeeklyReset && parseDate(today).getDay() === 1 && this.data.meta.lastWeeklyResetDate !== today) {
-        await this.runWeeklyReset(false);
-      } else if (this.data.settings.autoGenerateOnStartup) {
-        await this.generateTodayPlan(false);
-      }
+    this.addCommand({ id: "sync-week-to-daily-notes", name: "Sync this week chores to daily notes", callback: () => {
+      void this.syncWeekToDailyNotes();
+    } });
+    this.addCommand({ id: "create-chore-dashboard-note", name: "Create or open chore dashboard note", callback: () => {
+      void this.createOrOpenChoreDashboard();
+    } });
+    this.app.workspace.onLayoutReady(() => {
+      void (async () => {
+        const today = this.todayStr();
+        if (this.data.settings.autoWeeklyReset && parseDate(today).getDay() === 1 && this.data.meta.lastWeeklyResetDate !== today) {
+          await this.runWeeklyReset(false);
+        } else if (this.data.settings.autoGenerateOnStartup) {
+          await this.generateTodayPlan(false);
+        }
+      })().catch(() => {
+      });
     });
     this.startReminderTicker();
     this.restoreBodyDoubleSessionIfNeeded();
   }
   onunload() {
-    this.app.workspace.detachLeavesOfType(VIEW_TYPE);
     if (this.reminderTickId !== null)
       window.clearInterval(this.reminderTickId);
     if (this.bodyDoubleTimeoutId !== null)
@@ -1008,7 +1028,8 @@ ${list}`, 9e3);
     const label = this.getBodyDoubleRemainingLabel();
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE);
     for (const leaf of leaves) {
-      const root = leaf.view?.containerEl;
+      const view = leaf.view;
+      const root = view instanceof ADHDChoresView ? view.containerEl : null;
       if (!root)
         continue;
       root.querySelectorAll(".adhd-body-timer-value").forEach((el) => {
@@ -1202,7 +1223,9 @@ ${list}`, 9e3);
       file = await this.app.vault.create(path, content);
       new import_obsidian.Notice("Created Chore Dashboard note.");
     }
-    await this.app.workspace.getLeaf(false).openFile(file);
+    if (file instanceof import_obsidian.TFile) {
+      await this.app.workspace.getLeaf(false).openFile(file);
+    }
   }
   getDailyNotesConfig() {
     const fallback = { folder: "", format: "YYYY-MM-DD" };
@@ -1216,9 +1239,10 @@ ${list}`, 9e3);
       };
     }
     try {
-      const internal = this.app.internalPlugins;
-      const daily = internal?.getPluginById?.("daily-notes") || internal?.plugins?.["daily-notes"] || null;
-      const opts = daily?.instance?.options || daily?.options || null;
+      const appWithInternal = this.app;
+      const internal = appWithInternal.internalPlugins;
+      const daily = internal?.getPluginById?.("daily-notes") ?? internal?.plugins?.["daily-notes"] ?? null;
+      const opts = daily?.instance?.options ?? daily?.options ?? null;
       return {
         folder: opts?.folder || "",
         format: opts?.format || "YYYY-MM-DD"
@@ -1250,7 +1274,9 @@ ${list}`, 9e3);
 
 `);
     }
-    await this.app.workspace.getLeaf(false).openFile(file);
+    if (file instanceof import_obsidian.TFile) {
+      await this.app.workspace.getLeaf(false).openFile(file);
+    }
   }
   buildDailyChoreBlock(date) {
     const tasks = this.getTasksForDate(date);
@@ -1296,15 +1322,16 @@ ${list}`, 9e3);
 
 `);
     }
-    const note = file;
-    const content = await this.app.vault.cachedRead(note);
+    if (!(file instanceof import_obsidian.TFile))
+      return;
+    const content = await this.app.vault.cachedRead(file);
     const block = this.buildDailyChoreBlock(date);
     const re = /<!-- ADHD_CHORES_START -->[\s\S]*?<!-- ADHD_CHORES_END -->/m;
     const next = re.test(content) ? content.replace(re, block) : `${content.trimEnd()}
 
 ${block}
 `;
-    await this.app.vault.modify(note, next);
+    await this.app.vault.modify(file, next);
     if (showNotice)
       new import_obsidian.Notice(`Synced chores to ${path}`);
   }
