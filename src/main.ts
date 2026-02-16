@@ -229,13 +229,13 @@ function cloneDefaults(): ChoreData {
 
 function defaultBadgeCatalog(): BadgeCatalogItem[] {
 	return [
-		{ id: 'quick-win', label: 'Quick Win', description: 'Complete a 5-minute or shorter chore', targetType: 'quick', targetValue: 1 },
+		{ id: 'quick-win', label: 'Quick win', description: 'Complete a 5-minute or shorter chore', targetType: 'quick', targetValue: 1 },
 		{ id: 'tasks-10', label: 'Momentum', description: 'Complete 10 chores', targetType: 'tasks', targetValue: 10 },
 		{ id: 'tasks-50', label: 'Consistency', description: 'Complete 50 chores', targetType: 'tasks', targetValue: 50 },
-		{ id: 'tasks-100', label: 'House Hero', description: 'Complete 100 chores', targetType: 'tasks', targetValue: 100 },
-		{ id: 'streak-3', label: '3-Day Streak', description: 'Complete chores 3 days in a row', targetType: 'streak', targetValue: 3 },
-		{ id: 'streak-7', label: '7-Day Streak', description: 'Complete chores 7 days in a row', targetType: 'streak', targetValue: 7 },
-		{ id: 'streak-14', label: '14-Day Streak', description: 'Complete chores 14 days in a row', targetType: 'streak', targetValue: 14 },
+		{ id: 'tasks-100', label: 'House hero', description: 'Complete 100 chores', targetType: 'tasks', targetValue: 100 },
+		{ id: 'streak-3', label: '3-day streak', description: 'Complete chores 3 days in a row', targetType: 'streak', targetValue: 3 },
+		{ id: 'streak-7', label: '7-day streak', description: 'Complete chores 7 days in a row', targetType: 'streak', targetValue: 7 },
+		{ id: 'streak-14', label: '14-day streak', description: 'Complete chores 14 days in a row', targetType: 'streak', targetValue: 14 },
 		{ id: 'level-2', label: 'Level 2', description: 'Reach level 2', targetType: 'level', targetValue: 2 },
 		{ id: 'level-3', label: 'Level 3', description: 'Reach level 3', targetType: 'level', targetValue: 3 },
 		{ id: 'level-5', label: 'Level 5', description: 'Reach level 5', targetType: 'level', targetValue: 5 },
@@ -261,7 +261,7 @@ class AddChoreModal extends Modal {
 	}
 
 	onOpen(): void {
-		this.titleEl.setText('Add Chore Template');
+		this.titleEl.setText('Add chore template');
 		const { contentEl } = this;
 		contentEl.empty();
 
@@ -269,7 +269,7 @@ class AddChoreModal extends Modal {
 		new Setting(contentEl).setName('Room').addText(t => t.setPlaceholder('Kitchen').onChange(v => (this.roomVal = v.trim())));
 		new Setting(contentEl).setName('Frequency').addDropdown(d => {
 			d.addOption('daily', 'Daily');
-			d.addOption('every_n_days', 'Every N Days');
+			d.addOption('every_n_days', 'Every n days');
 			d.addOption('weekly', 'Weekly');
 			d.addOption('monthly', 'Monthly');
 			d.setValue(this.frequencyVal);
@@ -331,7 +331,7 @@ class BodyDoubleModal extends Modal {
 		this.onPick = onPick;
 	}
 	onOpen(): void {
-		this.titleEl.setText('Body Double Session');
+		this.titleEl.setText('Body double session');
 		const { contentEl } = this;
 		contentEl.empty();
 		contentEl.createEl('p', { text: 'Pick a focus sprint duration.', cls: 'adhd-empty' });
@@ -402,7 +402,7 @@ class ADHDChoresView extends ItemView {
 		this.plugin = plugin;
 	}
 	getViewType(): string { return VIEW_TYPE; }
-	getDisplayText(): string { return 'Chore Autopilot'; }
+	getDisplayText(): string { return 'Chore autopilot'; }
 	getIcon(): string { return 'check-square'; }
 	onOpen(): void { this.render(); }
 	render(): void {
@@ -556,114 +556,114 @@ class ADHDChoresSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		new Setting(containerEl).setName('ADHD chore autopilot').setHeading();
+		new Setting(containerEl).setName('General').setHeading();
 		containerEl.createEl('p', {
 			text: 'Task query integration officially supports the community Tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.',
 			cls: 'adhd-empty',
 		});
 
-		new Setting(containerEl).setName('Max daily minutes').addText(t => t.setValue(String(this.plugin.data.settings.maxDailyMinutes)).onChange(async v => {
+		new Setting(containerEl).setName('Max daily minutes').addText(t => t.setValue(String(this.plugin.data.settings.maxDailyMinutes)).onChange(v => {
 			const n = parseInt(v || '30', 10);
 			this.plugin.data.settings.maxDailyMinutes = Number.isFinite(n) ? Math.max(5, n) : 30;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
-		new Setting(containerEl).setName('Auto-generate on startup').addToggle(t => t.setValue(this.plugin.data.settings.autoGenerateOnStartup).onChange(async v => {
+		new Setting(containerEl).setName('Auto-generate on startup').addToggle(t => t.setValue(this.plugin.data.settings.autoGenerateOnStartup).onChange(v => {
 			this.plugin.data.settings.autoGenerateOnStartup = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
-		new Setting(containerEl).setName('Rollover missed chores').addToggle(t => t.setValue(this.plugin.data.settings.rolloverMissed).onChange(async v => {
+		new Setting(containerEl).setName('Rollover missed chores').addToggle(t => t.setValue(this.plugin.data.settings.rolloverMissed).onChange(v => {
 			this.plugin.data.settings.rolloverMissed = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
-		new Setting(containerEl).setName('Quick focus task count').addText(t => t.setValue(String(this.plugin.data.settings.focusTaskCount)).onChange(async v => {
+		new Setting(containerEl).setName('Quick focus task count').addText(t => t.setValue(String(this.plugin.data.settings.focusTaskCount)).onChange(v => {
 			const n = parseInt(v || '3', 10);
 			this.plugin.data.settings.focusTaskCount = Number.isFinite(n) ? Math.min(6, Math.max(1, n)) : 3;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
-		new Setting(containerEl).setName('Enable streaks and rewards').setDesc('Optional. Turn this off anytime.').addToggle(t => t.setValue(this.plugin.data.settings.enableRewards).onChange(async v => {
+		new Setting(containerEl).setName('Enable streaks and rewards').setDesc('Optional. Turn this off anytime.').addToggle(t => t.setValue(this.plugin.data.settings.enableRewards).onChange(v => {
 			this.plugin.data.settings.enableRewards = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 			this.plugin.refreshView();
 		}));
 
-		new Setting(containerEl).setName('Show gamification chips').addToggle(t => t.setValue(this.plugin.data.settings.showGamification).onChange(async v => {
+		new Setting(containerEl).setName('Show gamification chips').addToggle(t => t.setValue(this.plugin.data.settings.showGamification).onChange(v => {
 			this.plugin.data.settings.showGamification = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 			this.plugin.refreshView();
 		}));
 
 		new Setting(containerEl).setName('Reminders').setHeading();
-		new Setting(containerEl).setName('Enable reminders').addToggle(t => t.setValue(this.plugin.data.settings.remindersEnabled).onChange(async v => {
+		new Setting(containerEl).setName('Enable reminders').addToggle(t => t.setValue(this.plugin.data.settings.remindersEnabled).onChange(v => {
 			this.plugin.data.settings.remindersEnabled = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
-		new Setting(containerEl).setName('Reminder times').setDesc('Comma-separated 24h times, e.g. 09:00,14:00,19:00').addText(t => t.setValue(this.plugin.data.settings.reminderTimesCsv).onChange(async v => {
+		new Setting(containerEl).setName('Reminder times').setDesc('Comma-separated 24h times, e.g. 09:00,14:00,19:00').addText(t => t.setValue(this.plugin.data.settings.reminderTimesCsv).onChange(v => {
 			this.plugin.data.settings.reminderTimesCsv = v.trim();
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
 		new Setting(containerEl).setName('Logging').setHeading();
-		new Setting(containerEl).setName('Log events to note').addToggle(t => t.setValue(this.plugin.data.settings.logToNote).onChange(async v => {
+		new Setting(containerEl).setName('Log events to note').addToggle(t => t.setValue(this.plugin.data.settings.logToNote).onChange(v => {
 			this.plugin.data.settings.logToNote = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
-		new Setting(containerEl).setName('Log note path').addText(t => t.setValue(this.plugin.data.settings.logNotePath).onChange(async v => {
+		new Setting(containerEl).setName('Log note path').addText(t => t.setValue(this.plugin.data.settings.logNotePath).onChange(v => {
 			this.plugin.data.settings.logNotePath = v.trim() || 'TaskNotes/Chore Log.md';
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
 		new Setting(containerEl).setName('Weekly reset').setHeading();
-		new Setting(containerEl).setName('Auto weekly reset').setDesc('Runs on Mondays at startup.').addToggle(t => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange(async v => {
+		new Setting(containerEl).setName('Auto weekly reset').setDesc('Runs on Mondays at startup.').addToggle(t => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange(v => {
 			this.plugin.data.settings.autoWeeklyReset = v;
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 		}));
 
 		new Setting(containerEl).setName('Daily notes integration').setHeading();
 		new Setting(containerEl)
 			.setName('Enable Daily Notes integration')
 			.setDesc('Use selected date actions to open/sync daily notes.')
-			.addToggle(t => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange(async v => {
+			.addToggle(t => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange(v => {
 				this.plugin.data.settings.dailyNotesIntegrationEnabled = v;
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
 			.setName('Auto-sync chore block when planning')
 			.setDesc('Writes/updates a chore block in each planned day note.')
-			.addToggle(t => t.setValue(this.plugin.data.settings.syncDailyBlockOnPlan).onChange(async v => {
+			.addToggle(t => t.setValue(this.plugin.data.settings.syncDailyBlockOnPlan).onChange(v => {
 				this.plugin.data.settings.syncDailyBlockOnPlan = v;
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
 			.setName('Daily notes folder override')
 			.setDesc('Leave blank to use core Daily Notes plugin folder.')
-			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFolder).onChange(async v => {
+			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFolder).onChange(v => {
 				this.plugin.data.settings.dailyNotesFolder = v.trim();
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
 			.setName('Daily note date format override')
 			.setDesc('Leave blank to use core Daily Notes format. Example: YYYY-MM-DD')
-			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange(async v => {
+			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange(v => {
 				this.plugin.data.settings.dailyNotesFormat = v.trim();
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
-			.setName('Emit Tasks plugin format')
+			.setName('Emit Tasks format')
 			.setDesc('Appends optional tag + due date emoji so Tasks/Agenda plugins can index chores.')
-			.addToggle(t => t.setValue(this.plugin.data.settings.emitTasksPluginFormat).onChange(async v => {
+			.addToggle(t => t.setValue(this.plugin.data.settings.emitTasksPluginFormat).onChange(v => {
 				this.plugin.data.settings.emitTasksPluginFormat = v;
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
 			.setName('Chore task tag')
 			.setDesc('Optional. Leave blank for no tag. Example: #task/chore')
-			.addText(t => t.setValue(this.plugin.data.settings.choreTaskTag).onChange(async v => {
+			.addText(t => t.setValue(this.plugin.data.settings.choreTaskTag).onChange(v => {
 				this.plugin.data.settings.choreTaskTag = v.trim();
-				await this.plugin.savePluginData();
+				void this.plugin.savePluginData();
 			}));
 
 		new Setting(containerEl).setName('Chore templates').setHeading();
@@ -671,9 +671,9 @@ class ADHDChoresSettingTab extends PluginSettingTab {
 			new Setting(containerEl)
 				.setName(`${template.name} (${template.room})`)
 				.setDesc(this.plugin.describeTemplate(template))
-				.addToggle(t => t.setValue(template.active).onChange(async v => {
+				.addToggle(t => t.setValue(template.active).onChange(v => {
 					template.active = v;
-					await this.plugin.savePluginData();
+					void this.plugin.savePluginData();
 					this.display();
 				}))
 				.addButton(b => b.setButtonText('Delete').setWarning().onClick(() => {
@@ -705,7 +705,7 @@ export default class ADHDChoresPlugin extends Plugin {
 		this.registerView(VIEW_TYPE, leaf => new ADHDChoresView(leaf, this));
 		this.addSettingTab(new ADHDChoresSettingTab(this.app, this));
 
-		this.addRibbonIcon('check-square', 'Open Chore Autopilot', () => { void this.activateView(); });
+		this.addRibbonIcon('check-square', 'Open chore autopilot', () => { void this.activateView(); });
 		this.bodyDoubleStatusEl = this.addStatusBarItem();
 		this.updateBodyDoubleStatus();
 
@@ -1208,14 +1208,14 @@ export default class ADHDChoresPlugin extends Plugin {
 
 		if (totalDone >= 10) await this.unlockBadge('tasks-10', 'Momentum', 'Completed 10 chores');
 		if (totalDone >= 50) await this.unlockBadge('tasks-50', 'Consistency', 'Completed 50 chores');
-		if (totalDone >= 100) await this.unlockBadge('tasks-100', 'House Hero', 'Completed 100 chores');
+		if (totalDone >= 100) await this.unlockBadge('tasks-100', 'House hero', 'Completed 100 chores');
 
-		if (streak >= 3) await this.unlockBadge('streak-3', '3-Day Streak', 'Completed chores 3 days in a row');
-		if (streak >= 7) await this.unlockBadge('streak-7', '7-Day Streak', 'Completed chores 7 days in a row');
-		if (streak >= 14) await this.unlockBadge('streak-14', '14-Day Streak', 'Completed chores 14 days in a row');
+		if (streak >= 3) await this.unlockBadge('streak-3', '3-day streak', 'Completed chores 3 days in a row');
+		if (streak >= 7) await this.unlockBadge('streak-7', '7-day streak', 'Completed chores 7 days in a row');
+		if (streak >= 14) await this.unlockBadge('streak-14', '14-day streak', 'Completed chores 14 days in a row');
 
 		const quickWin = task.estMinutes <= 5;
-		if (quickWin) await this.unlockBadge('quick-win', 'Quick Win', 'Completed a 5-minute or shorter chore');
+		if (quickWin) await this.unlockBadge('quick-win', 'Quick win', 'Completed a 5-minute or shorter chore');
 	}
 
 	private async unlockBadge(id: string, label: string, description: string): Promise<void> {
@@ -1277,9 +1277,9 @@ export default class ADHDChoresPlugin extends Plugin {
 			if (leaf) await leaf.setViewState({ type: VIEW_TYPE, active: true });
 		}
 		if (leaf) {
-			workspace.revealLeaf(leaf);
+			void workspace.revealLeaf(leaf);
 			const view = leaf.view as ADHDChoresView;
-			if (view && typeof view.render === 'function') await view.render();
+			if (view && typeof view.render === 'function') view.render();
 		}
 	}
 
