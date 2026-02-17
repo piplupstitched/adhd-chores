@@ -161,11 +161,11 @@ var AddChoreModal = class extends import_obsidian.Modal {
       d.setValue(this.frequencyVal);
       d.onChange((v) => this.frequencyVal = v);
     });
-    new import_obsidian.Setting(contentEl).setName("Interval").setDesc("For every N days").addText((t) => t.setValue(String(this.intervalVal)).onChange((v) => {
+    new import_obsidian.Setting(contentEl).setName("Interval").setDesc("For every n days").addText((t) => t.setValue(String(this.intervalVal)).onChange((v) => {
       const n = parseInt(v || "1", 10);
       this.intervalVal = Number.isFinite(n) && n > 0 ? n : 1;
     }));
-    new import_obsidian.Setting(contentEl).setName("Weekly days").setDesc("0-6 comma list (0=Sun)").addText((t) => t.setPlaceholder("1,4").onChange((v) => this.preferredDaysVal = v.trim()));
+    new import_obsidian.Setting(contentEl).setName("Weekly days").setDesc("0-6 comma list (0=sun)").addText((t) => t.setPlaceholder("1,4").onChange((v) => this.preferredDaysVal = v.trim()));
     new import_obsidian.Setting(contentEl).setName("Monthly day").setDesc("1-28").addText((t) => t.setValue(String(this.dayOfMonthVal)).onChange((v) => {
       const n = parseInt(v || "1", 10);
       this.dayOfMonthVal = Number.isFinite(n) ? Math.min(28, Math.max(1, n)) : 1;
@@ -394,7 +394,7 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
     }
     container.createEl("div", { cls: "adhd-section-title", text: `Day plan (${viewDate})` });
     if (todayTasks.length === 0) {
-      container.createEl("div", { cls: "adhd-empty", text: 'No chores scheduled. Click "Plan today".' });
+      container.createEl("div", { cls: "adhd-empty", text: 'No chores scheduled. Click "plan today".' });
     } else {
       for (const task of todayTasks) {
         const row = container.createDiv("adhd-task-row");
@@ -440,9 +440,9 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian.Setting(containerEl).setName("General").setHeading();
+    new import_obsidian.Setting(containerEl).setName("Planner options").setHeading();
     containerEl.createEl("p", {
-      text: "Task query integration officially supports the community Tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.",
+      text: "Task query integration officially supports the community tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.",
       cls: "adhd-empty"
     });
     new import_obsidian.Setting(containerEl).setName("Max daily minutes").addText((t) => t.setValue(String(this.plugin.data.settings.maxDailyMinutes)).onChange((v) => {
@@ -497,7 +497,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       void this.plugin.savePluginData();
     }));
     new import_obsidian.Setting(containerEl).setName("Daily notes integration").setHeading();
-    new import_obsidian.Setting(containerEl).setName("Enable Daily Notes integration").setDesc("Use selected date actions to open/sync daily notes.").addToggle((t) => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Enable daily notes integration").setDesc("Use selected date actions to open/sync daily notes.").addToggle((t) => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange((v) => {
       this.plugin.data.settings.dailyNotesIntegrationEnabled = v;
       void this.plugin.savePluginData();
     }));
@@ -505,15 +505,15 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.syncDailyBlockOnPlan = v;
       void this.plugin.savePluginData();
     }));
-    new import_obsidian.Setting(containerEl).setName("Daily notes folder override").setDesc("Leave blank to use core Daily Notes plugin folder.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFolder).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Daily notes folder override").setDesc("Leave blank to use core daily notes plugin folder.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFolder).onChange((v) => {
       this.plugin.data.settings.dailyNotesFolder = v.trim();
       void this.plugin.savePluginData();
     }));
-    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use core Daily Notes format. Example: YYYY-MM-DD").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use core daily notes format. Example: YYYY-MM-DD").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
       this.plugin.data.settings.dailyNotesFormat = v.trim();
       void this.plugin.savePluginData();
     }));
-    new import_obsidian.Setting(containerEl).setName("Emit Tasks format").setDesc("Appends optional tag + due date emoji so Tasks/Agenda plugins can index chores.").addToggle((t) => t.setValue(this.plugin.data.settings.emitTasksPluginFormat).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Emit tasks format").setDesc("Appends optional tag + due date emoji so tasks/agenda plugins can index chores.").addToggle((t) => t.setValue(this.plugin.data.settings.emitTasksPluginFormat).onChange((v) => {
       this.plugin.data.settings.emitTasksPluginFormat = v;
       void this.plugin.savePluginData();
     }));
@@ -743,13 +743,13 @@ var ADHDChoresPlugin = class extends import_obsidian.Plugin {
       await this.generateTodayPlan(false);
     const tasks = this.getTasksForDate(today).filter((t) => t.status === "pending").sort((a, b) => a.estMinutes - b.estMinutes).slice(0, this.data.settings.focusTaskCount);
     if (tasks.length === 0) {
-      new import_obsidian.Notice("Quick Focus: no pending chores right now.");
+      new import_obsidian.Notice("Quick focus: no pending chores right now.");
       return;
     }
     const list = tasks.map((t) => `- ${t.title} (${t.estMinutes}m)`).join("\n");
-    new import_obsidian.Notice(`Quick Focus (${tasks.length}):
+    new import_obsidian.Notice(`Quick focus (${tasks.length}):
 ${list}`, 9e3);
-    await this.logEvent(`Quick Focus suggested ${tasks.length} tasks`);
+    await this.logEvent(`Quick focus suggested ${tasks.length} tasks`);
     this.refreshView();
   }
   async completeTask(taskId) {
@@ -1022,7 +1022,7 @@ ${list}`, 9e3);
       this.bodyDoubleStatusEl.setText("");
       return;
     }
-    this.bodyDoubleStatusEl.setText(`Body Double ${this.getBodyDoubleRemainingLabel()}`);
+    this.bodyDoubleStatusEl.setText(`Body double ${this.getBodyDoubleRemainingLabel()}`);
   }
   updateVisibleTimerText() {
     const label = this.getBodyDoubleRemainingLabel();
@@ -1154,7 +1154,7 @@ ${list}`, 9e3);
     const slash = path.lastIndexOf("/");
     if (slash > 0)
       await this.ensureFolderPath(path.slice(0, slash));
-    return await this.app.vault.create(path, "# Chore Log\n\n");
+    return await this.app.vault.create(path, "# Chore log\n\n");
   }
   async logEvent(message) {
     if (!this.data.settings.logToNote)
@@ -1183,7 +1183,7 @@ ${list}`, 9e3);
     if (!(file instanceof import_obsidian.TFile)) {
       await this.ensureFolderPath("TaskNotes");
       const content = [
-        "# Chore Dashboard",
+        "# Chore dashboard",
         "",
         `Tag: \`${tag || "(none)"}\``,
         "",
@@ -1211,7 +1211,7 @@ ${list}`, 9e3);
         "sort by due",
         "```",
         "",
-        "## Completed (Last 14 days)",
+        "## Completed (last 14 days)",
         "```tasks",
         "done",
         ...tag ? [`tags include ${tag}`] : [],
@@ -1221,7 +1221,7 @@ ${list}`, 9e3);
         ""
       ].join("\n");
       file = await this.app.vault.create(path, content);
-      new import_obsidian.Notice("Created Chore Dashboard note.");
+      new import_obsidian.Notice("Created chore dashboard note.");
     }
     if (file instanceof import_obsidian.TFile) {
       await this.app.workspace.getLeaf(false).openFile(file);
@@ -1260,7 +1260,7 @@ ${list}`, 9e3);
   }
   async openDailyNoteForDate(date) {
     if (!this.data.settings.dailyNotesIntegrationEnabled) {
-      new import_obsidian.Notice("Daily Notes integration is disabled in settings.");
+      new import_obsidian.Notice("Daily notes integration is disabled in settings.");
       return;
     }
     const path = this.buildDailyNotePath(date);
@@ -1308,7 +1308,7 @@ ${list}`, 9e3);
   async syncDateToDailyNote(date, showNotice = true) {
     if (!this.data.settings.dailyNotesIntegrationEnabled) {
       if (showNotice)
-        new import_obsidian.Notice("Daily Notes integration is disabled in settings.");
+        new import_obsidian.Notice("Daily notes integration is disabled in settings.");
       return;
     }
     const path = this.buildDailyNotePath(date);
@@ -1338,7 +1338,7 @@ ${block}
   async syncWeekToDailyNotes(showNotice = true) {
     if (!this.data.settings.dailyNotesIntegrationEnabled) {
       if (showNotice)
-        new import_obsidian.Notice("Daily Notes integration is disabled in settings.");
+        new import_obsidian.Notice("Daily notes integration is disabled in settings.");
       return;
     }
     const today = this.todayStr();

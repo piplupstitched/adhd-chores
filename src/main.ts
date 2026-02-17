@@ -275,11 +275,11 @@ class AddChoreModal extends Modal {
 			d.setValue(this.frequencyVal);
 			d.onChange(v => (this.frequencyVal = v as FrequencyType));
 		});
-		new Setting(contentEl).setName('Interval').setDesc('For every N days').addText(t => t.setValue(String(this.intervalVal)).onChange(v => {
+		new Setting(contentEl).setName('Interval').setDesc('For every n days').addText(t => t.setValue(String(this.intervalVal)).onChange(v => {
 			const n = parseInt(v || '1', 10);
 			this.intervalVal = Number.isFinite(n) && n > 0 ? n : 1;
 		}));
-		new Setting(contentEl).setName('Weekly days').setDesc('0-6 comma list (0=Sun)').addText(t => t.setPlaceholder('1,4').onChange(v => (this.preferredDaysVal = v.trim())));
+		new Setting(contentEl).setName('Weekly days').setDesc('0-6 comma list (0=sun)').addText(t => t.setPlaceholder('1,4').onChange(v => (this.preferredDaysVal = v.trim())));
 		new Setting(contentEl).setName('Monthly day').setDesc('1-28').addText(t => t.setValue(String(this.dayOfMonthVal)).onChange(v => {
 			const n = parseInt(v || '1', 10);
 			this.dayOfMonthVal = Number.isFinite(n) ? Math.min(28, Math.max(1, n)) : 1;
@@ -509,7 +509,7 @@ class ADHDChoresView extends ItemView {
 
 		container.createEl('div', { cls: 'adhd-section-title', text: `Day plan (${viewDate})` });
 		if (todayTasks.length === 0) {
-			container.createEl('div', { cls: 'adhd-empty', text: 'No chores scheduled. Click "Plan today".' });
+			container.createEl('div', { cls: 'adhd-empty', text: 'No chores scheduled. Click "plan today".' });
 		} else {
 			for (const task of todayTasks) {
 				const row = container.createDiv('adhd-task-row');
@@ -556,9 +556,9 @@ class ADHDChoresSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		new Setting(containerEl).setName('General').setHeading();
+		new Setting(containerEl).setName('Planner options').setHeading();
 		containerEl.createEl('p', {
-			text: 'Task query integration officially supports the community Tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.',
+			text: 'Task query integration officially supports the community tasks plugin (obsidian-tasks-plugin). Other task/kanban plugins may not index checklist lines the same way.',
 			cls: 'adhd-empty',
 		});
 
@@ -624,7 +624,7 @@ class ADHDChoresSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl).setName('Daily notes integration').setHeading();
 		new Setting(containerEl)
-			.setName('Enable Daily Notes integration')
+			.setName('Enable daily notes integration')
 			.setDesc('Use selected date actions to open/sync daily notes.')
 			.addToggle(t => t.setValue(this.plugin.data.settings.dailyNotesIntegrationEnabled).onChange(v => {
 				this.plugin.data.settings.dailyNotesIntegrationEnabled = v;
@@ -639,21 +639,21 @@ class ADHDChoresSettingTab extends PluginSettingTab {
 			}));
 		new Setting(containerEl)
 			.setName('Daily notes folder override')
-			.setDesc('Leave blank to use core Daily Notes plugin folder.')
+			.setDesc('Leave blank to use core daily notes plugin folder.')
 			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFolder).onChange(v => {
 				this.plugin.data.settings.dailyNotesFolder = v.trim();
 				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
 			.setName('Daily note date format override')
-			.setDesc('Leave blank to use core Daily Notes format. Example: YYYY-MM-DD')
+			.setDesc('Leave blank to use core daily notes format. Example: YYYY-MM-DD')
 			.addText(t => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange(v => {
 				this.plugin.data.settings.dailyNotesFormat = v.trim();
 				void this.plugin.savePluginData();
 			}));
 		new Setting(containerEl)
-			.setName('Emit Tasks format')
-			.setDesc('Appends optional tag + due date emoji so Tasks/Agenda plugins can index chores.')
+			.setName('Emit tasks format')
+			.setDesc('Appends optional tag + due date emoji so tasks/agenda plugins can index chores.')
 			.addToggle(t => t.setValue(this.plugin.data.settings.emitTasksPluginFormat).onChange(v => {
 				this.plugin.data.settings.emitTasksPluginFormat = v;
 				void this.plugin.savePluginData();
@@ -886,12 +886,12 @@ export default class ADHDChoresPlugin extends Plugin {
 		const tasks = this.getTasksForDate(today).filter(t => t.status === 'pending').sort((a, b) => a.estMinutes - b.estMinutes).slice(0, this.data.settings.focusTaskCount);
 
 		if (tasks.length === 0) {
-			new Notice('Quick Focus: no pending chores right now.');
+		new Notice('Quick focus: no pending chores right now.');
 			return;
 		}
 		const list = tasks.map(t => `- ${t.title} (${t.estMinutes}m)`).join('\n');
-		new Notice(`Quick Focus (${tasks.length}):\n${list}`, 9000);
-		await this.logEvent(`Quick Focus suggested ${tasks.length} tasks`);
+		new Notice(`Quick focus (${tasks.length}):\n${list}`, 9000);
+		await this.logEvent(`Quick focus suggested ${tasks.length} tasks`);
 		this.refreshView();
 	}
 
@@ -1179,7 +1179,7 @@ export default class ADHDChoresPlugin extends Plugin {
 			this.bodyDoubleStatusEl.setText('');
 			return;
 		}
-		this.bodyDoubleStatusEl.setText(`Body Double ${this.getBodyDoubleRemainingLabel()}`);
+		this.bodyDoubleStatusEl.setText(`Body double ${this.getBodyDoubleRemainingLabel()}`);
 	}
 
 	private updateVisibleTimerText(): void {
@@ -1305,7 +1305,7 @@ export default class ADHDChoresPlugin extends Plugin {
 		if (existing instanceof TFile) return existing;
 		const slash = path.lastIndexOf('/');
 		if (slash > 0) await this.ensureFolderPath(path.slice(0, slash));
-		return await this.app.vault.create(path, '# Chore Log\n\n');
+		return await this.app.vault.create(path, '# Chore log\n\n');
 	}
 
 	async logEvent(message: string): Promise<void> {
@@ -1337,7 +1337,7 @@ export default class ADHDChoresPlugin extends Plugin {
 		if (!(file instanceof TFile)) {
 			await this.ensureFolderPath('TaskNotes');
 			const content = [
-				'# Chore Dashboard',
+				'# Chore dashboard',
 				'',
 				`Tag: \`${tag || '(none)'}\``,
 				'',
@@ -1365,7 +1365,7 @@ export default class ADHDChoresPlugin extends Plugin {
 				'sort by due',
 				'```',
 				'',
-				'## Completed (Last 14 days)',
+				'## Completed (last 14 days)',
 				'```tasks',
 				'done',
 				...(tag ? [`tags include ${tag}`] : []),
@@ -1375,7 +1375,7 @@ export default class ADHDChoresPlugin extends Plugin {
 				'',
 			].join('\n');
 			file = await this.app.vault.create(path, content);
-			new Notice('Created Chore Dashboard note.');
+			new Notice('Created chore dashboard note.');
 		}
 
 		if (file instanceof TFile) {
@@ -1422,7 +1422,7 @@ export default class ADHDChoresPlugin extends Plugin {
 
 	async openDailyNoteForDate(date: string): Promise<void> {
 		if (!this.data.settings.dailyNotesIntegrationEnabled) {
-			new Notice('Daily Notes integration is disabled in settings.');
+			new Notice('Daily notes integration is disabled in settings.');
 			return;
 		}
 
@@ -1473,7 +1473,7 @@ export default class ADHDChoresPlugin extends Plugin {
 
 	async syncDateToDailyNote(date: string, showNotice = true): Promise<void> {
 		if (!this.data.settings.dailyNotesIntegrationEnabled) {
-			if (showNotice) new Notice('Daily Notes integration is disabled in settings.');
+			if (showNotice) new Notice('Daily notes integration is disabled in settings.');
 			return;
 		}
 
@@ -1501,7 +1501,7 @@ export default class ADHDChoresPlugin extends Plugin {
 
 	async syncWeekToDailyNotes(showNotice = true): Promise<void> {
 		if (!this.data.settings.dailyNotesIntegrationEnabled) {
-			if (showNotice) new Notice('Daily Notes integration is disabled in settings.');
+			if (showNotice) new Notice('Daily notes integration is disabled in settings.');
 			return;
 		}
 		const today = this.todayStr();
