@@ -366,8 +366,8 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
       chips.createDiv({ cls: "adhd-chip", text: `${pendingToday.length} pending` });
       chips.createDiv({ cls: "adhd-chip", text: `${doneToday} done today` });
       if (this.plugin.data.settings.enableRewards) {
-        chips.createDiv({ cls: "adhd-chip", text: `lvl ${this.plugin.data.rewards.level}` });
-        chips.createDiv({ cls: "adhd-chip", text: `${this.plugin.data.rewards.xp} xp` });
+        chips.createDiv({ cls: "adhd-chip", text: `Level ${this.plugin.data.rewards.level}` });
+        chips.createDiv({ cls: "adhd-chip", text: `${this.plugin.data.rewards.xp} XP` });
         chips.createDiv({ cls: "adhd-chip", text: `${this.plugin.data.rewards.currentStreak} day streak` });
         chips.createDiv({ cls: "adhd-chip", text: `${this.plugin.data.badges.length} badges` });
       }
@@ -427,7 +427,7 @@ var ADHDChoresView = class extends import_obsidian.ItemView {
         const row = container.createDiv("adhd-task-row");
         const main = row.createDiv("adhd-task-main");
         main.createEl("div", { cls: "adhd-task-title", text: task.title });
-        main.createEl("div", { cls: "adhd-task-meta", text: `due ${task.dueDate} | ${task.estMinutes}m` });
+        main.createEl("div", { cls: "adhd-task-meta", text: `Due ${task.dueDate} | ${task.estMinutes}m` });
       }
     }
   }
@@ -492,7 +492,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       void this.plugin.savePluginData();
     }));
     new import_obsidian.Setting(containerEl).setName("Weekly reset").setHeading();
-    new import_obsidian.Setting(containerEl).setName("Auto weekly reset").setDesc("Runs on mondays at startup.").addToggle((t) => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Auto weekly reset").setDesc("Runs on Mondays at startup.").addToggle((t) => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange((v) => {
       this.plugin.data.settings.autoWeeklyReset = v;
       void this.plugin.savePluginData();
     }));
@@ -509,7 +509,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.dailyNotesFolder = v.trim();
       void this.plugin.savePluginData();
     }));
-    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use core daily notes format; example: yyyy-mm-dd.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use core daily notes format; example: YYYY-MM-DD.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
       this.plugin.data.settings.dailyNotesFormat = v.trim();
       void this.plugin.savePluginData();
     }));
