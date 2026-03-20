@@ -442,7 +442,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
     containerEl.empty();
     new import_obsidian.Setting(containerEl).setName("Planner").setHeading();
     containerEl.createEl("p", {
-      text: "Task query integration officially supports the community tasks plugin (obsidian-tasks-plugin), and other task/kanban plugins may not index checklist lines the same way.",
+      text: "Task query integration is optimized for the community tasks plugin. Other task plugins may not index checklist items the same way.",
       cls: "adhd-empty"
     });
     new import_obsidian.Setting(containerEl).setName("Max daily minutes").addText((t) => t.setValue(String(this.plugin.data.settings.maxDailyMinutes)).onChange((v) => {
@@ -492,7 +492,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       void this.plugin.savePluginData();
     }));
     new import_obsidian.Setting(containerEl).setName("Weekly reset").setHeading();
-    new import_obsidian.Setting(containerEl).setName("Auto weekly reset").setDesc("Runs on Mondays at startup.").addToggle((t) => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Auto weekly reset").setDesc("Runs automatically at startup each week.").addToggle((t) => t.setValue(this.plugin.data.settings.autoWeeklyReset).onChange((v) => {
       this.plugin.data.settings.autoWeeklyReset = v;
       void this.plugin.savePluginData();
     }));
@@ -509,7 +509,7 @@ var ADHDChoresSettingTab = class extends import_obsidian.PluginSettingTab {
       this.plugin.data.settings.dailyNotesFolder = v.trim();
       void this.plugin.savePluginData();
     }));
-    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use core daily notes format; example: YYYY-MM-DD.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
+    new import_obsidian.Setting(containerEl).setName("Daily note date format override").setDesc("Leave blank to use the core daily notes plugin date format.").addText((t) => t.setValue(this.plugin.data.settings.dailyNotesFormat).onChange((v) => {
       this.plugin.data.settings.dailyNotesFormat = v.trim();
       void this.plugin.savePluginData();
     }));
